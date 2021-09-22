@@ -27,5 +27,7 @@ Attention! in this python file we only check 0 and (1,2) class is  balance !!!
 
 you can modify red point  
 1.Original dataset labels path
+
 2.Original dataset images path 
+
 3.Number of divisions
