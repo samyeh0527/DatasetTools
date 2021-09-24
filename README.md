@@ -1,4 +1,4 @@
-# *Dataset split  500 1000 1500 2000 ....*
+# *Dataset split and Check class txt file tools *
 
 ## before.
 
