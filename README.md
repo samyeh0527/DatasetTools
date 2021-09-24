@@ -29,7 +29,7 @@ you can modify red point
 3.Number of divisions
 
 
-0924 add check.py 
+0924 add checkcls.py 
 Example we only need 0 1 2 cls but the txt have 3 cls .
 sowe need replace 3 to 2 
 
