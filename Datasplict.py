@@ -3,7 +3,7 @@ import os
 import shutil
 from tqdm import tqdm, trange
 #setting default path and cls 0 ,1 
-
+from ascllart import art
 def cpfile(number,cls0,cls1_2,labels):
     for file in tqdm(allFileList):
         new_pathfile = pathfile+'/'+file
@@ -68,13 +68,7 @@ def cpimages(path,savepath,labels):
 
 
 if __name__ == '__main__':
-    print(" |\     /|(  ____ \\\__   __/( (    /|(  ____ \|\     /||\     /|( (    /|")
-    print(" | )   ( || (    \/   ) (   |  \  ( || (    \/| )   ( || )   ( ||  \  ( |")
-    print(" | (___) || (_____    | |   |   \ | || |      | (___) || |   | ||   \ | |")
-    print(" |  ___  |(_____  )   | |   | (\ \) || |      |  ___  || |   | || (\ \) |")
-    print(" | (   ) |      ) |   | |   | | \   || |      | (   ) || |   | || | \   |")
-    print(" | )   ( |/\____) |___) (___| )  \  || (____/\| )   ( || (___) || )  \  |")
-    print(" |/     \|\_______)\_______/|/    )_)(_______/|/     \|(_______)|/    )_)")
+    art.hisnchun()
     pathfile = r'./PWMFD_Train/labels'
     imgapthfile = r'./PWMFD_Train/images'
     allFileList = os.listdir(pathfile)
@@ -93,19 +87,7 @@ if __name__ == '__main__':
             cpfile(_,cls0,cls1_2,labels)
             checkcontent(labels)
             cpimages(imgapthfile,savepath,labels)
-    print("""\
-         _______  _______  _______  _______  _        _______ _________ _______  _ 
-        (  ____ \(  ___  )(       )(  ____ )( \      (  ____ \\__   __/(  ____ \( )
-        | (    \/| (   ) || () () || (    )|| (      | (    \/   ) (   | (    \/| |
-        | |      | |   | || || || || (____)|| |      | (__       | |   | (__    | |
-        | |      | |   | || |(_)| ||  _____)| |      |  __)      | |   |  __)   | |
-        | |      | |   | || |   | || (      | |      | (         | |   | (      (_)
-        | (____/\| (___) || )   ( || )      | (____/\| (____/\   | |   | (____/\ _ 
-        (_______/(_______)|/     \||/       (_______/(_______/   )_(   (_______/(_)
-        
-        
-        
-        """)
-        
+    art.complete()
+    art.mario()
 
 
