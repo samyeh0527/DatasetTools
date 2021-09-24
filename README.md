@@ -1,13 +1,13 @@
-Dataset split  500 1000 1500 2000 ....
+##Dataset split  500 1000 1500 2000 ....
 
-before.
+###before.
 
 
 ![1](https://user-images.githubusercontent.com/45279761/134307680-982593bf-d1c6-4f4a-8333-23ec5cda9621.png)
 
 
 
-after .
+###after .
 
 ![2](https://user-images.githubusercontent.com/45279761/134308220-b6c9965f-a5e3-40c9-86a9-e4472d5d3684.png)
 
@@ -29,7 +29,7 @@ you can modify red point
 3.Number of divisions
 
 
-0924 add checkcls.py 
+##0924 add checkcls.py 
 Example we only need 0 1 2 cls but the txt have 3 cls .
 sowe need replace 3 to 2 
 
