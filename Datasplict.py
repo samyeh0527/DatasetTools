@@ -7,8 +7,8 @@ from ascllart import art
 def cpfile(number,cls0,cls1_2,labels):
     for file in tqdm(allFileList):
         new_pathfile = pathfile+'/'+file
-        if file != 'cls0' or file != 'cls1_2':
-            with open(new_pathfile,'r+') as f:
+        #if file != 'cls0' or file != 'cls1_2':
+        with open(new_pathfile,'r+') as f:
                 line = f.readlines()
                 #replac [''] to " " and split str to list next find first character 0 or 1  
                 newline = str(line)
