@@ -64,7 +64,7 @@ def cpimages(path,savepath,labels):
         filelist = filelist.split(',')
         filelist2_format = filelist
         filelist = list(map(int,filelist))
-        countSort = sorted(list(map(int,set(AllimgList_int)&set(filelist))))
+        countSort = sorted(list(map(str,set(AllimgList_int)&set(filelist))))
         
         print('total .. ' ,len(countSort))
         if len(set(countSort)^set(filelist)) > 0 : 
@@ -85,9 +85,9 @@ if __name__ == '__main__':
     cls0 ,cls1,cls2= 0,0,0
     #can change rannge number (X,Y+1,Z)
     dataset_length = 10
-    dataset_splict = 15
-    cls_numbs = 1
-    for _ in range(dataset_length,dataset_length+1,dataset_splict):
+    dataset_splict = 1
+    cls_numbs = 2
+    for _ in range(dataset_length,dataset_length+5,dataset_splict):
         folderpath = './dataset'+str(_)
         if not os.path.isdir(folderpath):
             os.mkdir(folderpath)
@@ -98,7 +98,7 @@ if __name__ == '__main__':
             if not os.path.isdir(labels):
                 os.mkdir(labels)
             savepath = images
-            cls0 ,cls1 ,cls2 = cpfile(_,cls0,cls1,cls2,labels,cls_numbs)
+            cls0 ,cls1 ,cls2 = cpfile(_,cls0,cls1,cls2,labels,pathfile,cls_numbs)
             checkcontent(labels)
             cpimages(imgapthfile,savepath,labels)
         print(f'log : class 0  {cls0}.  class 1  {cls1}.  class 2  {cls2}. ')
