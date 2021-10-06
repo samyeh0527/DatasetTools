@@ -10,7 +10,7 @@ import Interface_ui as ui
 from selectpath import *
 from Rename import *
 import time
-
+from ToTxtList import *
 
 
 
@@ -26,6 +26,9 @@ class Main(QMainWindow, ui.Ui_Dialog):
          self.Re_pushButton2.clicked.connect(self.StartRename)
          self.RC_pushButton.clicked.connect(self.RC_path)
          self.RC_pushButton2.clicked.connect(self.StartReplace)
+         self.FT_pushButton_1.clicked.connect(self.FT_selectpath)
+         self.FT_pushButton_2.clicked.connect(self.FT_savepath)
+         self.FT_pushButton_3.clicked.connect(self.FT_start)
          self.listWidget.itemSelectionChanged.connect(self.itemActivated_event)
          self.Folderpath = None
          self.Imagepath = None
@@ -110,7 +113,7 @@ class Main(QMainWindow, ui.Ui_Dialog):
             Orinignalvalue0 = self.spinBox_4.value()
             Replacevalue1 = self.spinBox_5.value()
             print(Orinignalvalue0,Replacevalue1)
-            if Orinignalvalue0 == 0 or Replacevalue1 == 0 : self.textEdit_6.append("error check Orinignal class number and Replace class")
+            if Orinignalvalue0 == 0 or Replacevalue1 == 0 : self.textBrowser_3.append("error check Orinignal class number and Replace class")
             else:
                 check().checkcls(self.folderpath,str(Orinignalvalue0),str(Replacevalue1))
                 showtime= self.local__time()
@@ -119,15 +122,46 @@ class Main(QMainWindow, ui.Ui_Dialog):
         except Exception as e :
             print(e)
             self.textBrowser_3.append(showtime)
-            self.textBrowser_3.append(e)
-            
-            
+            self.textBrowser_3.append(e)        
 
     def local__time(self):
         localtime = time.localtime()
         result = time.strftime("%Y-%m-%d %I:%M:%S %p", localtime)
         return result
+    
+    def FT_selectpath(self):
+        try:
+            showtime= self.local__time()
+            selectpath = QtWidgets.QFileDialog.getExistingDirectory(self, 'Select Folder')
+            self.FT_textEdit_1.setPlainText(f'{selectpath}')
+            path_filelist = os.listdir(selectpath)
+            count = 0
+            for _ in path_filelist:
+                count+=1
+                self.textBrowser_5.append(f'{count}.{_}')
+            self.textBrowser_5.append(f'{showtime}       Total number is {count} ......')
+        except Exception as e :
+            print(e)
+            self.textBrowser_5.append(self.local__time())
+            self.textBrowser_5.append(f'Error {e}.')  
 
+    def FT_savepath(self):
+        showtime= self.local__time()
+        try:
+            savepath = QtWidgets.QFileDialog.getExistingDirectory(self, 'Select Folder')
+            self.FT_textEdit_2.setPlainText(f'{savepath}/Train.txt') 
+        except Exception as e :
+            print(e)
+            self.textBrowser_5.append(f'{showtime}     Error     {e}.')  
+
+    def FT_start(self):
+        showtime= self.local__time()
+        try:
+            Conversion_Txt(self.FT_textEdit_1.toPlainText(),self.FT_textEdit_2.toPlainText())
+            self.textBrowser_5.append(f'Complete ! ..check {self.FT_textEdit_2.toPlainText()}') 
+        except Exception as e :
+            print(e)
+            self.textBrowser_5.append(f'{showtime}     Error     {e}.')  
 
 if __name__ == '__main__':
     import sys
