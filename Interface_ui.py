@@ -15,6 +15,7 @@ class Ui_Dialog(object):
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
         Dialog.resize(870, 543)
+        Dialog.setTabletTracking(True)
         self.tabWidget = QtWidgets.QTabWidget(Dialog)
         self.tabWidget.setGeometry(QtCore.QRect(-10, 0, 971, 645))
         self.tabWidget.setObjectName("tabWidget")
@@ -46,10 +47,12 @@ class Ui_Dialog(object):
         self.label_4.setObjectName("label_4")
         self.spinBox = QtWidgets.QSpinBox(self.tab)
         self.spinBox.setGeometry(QtCore.QRect(560, 150, 51, 22))
+        self.spinBox.setMinimum(1)
         self.spinBox.setMaximum(99999)
         self.spinBox.setObjectName("spinBox")
         self.spinBox_2 = QtWidgets.QSpinBox(self.tab)
         self.spinBox_2.setGeometry(QtCore.QRect(670, 150, 51, 22))
+        self.spinBox_2.setMinimum(1)
         self.spinBox_2.setMaximum(99999)
         self.spinBox_2.setObjectName("spinBox_2")
         self.label_5 = QtWidgets.QLabel(self.tab)
@@ -57,6 +60,7 @@ class Ui_Dialog(object):
         self.label_5.setObjectName("label_5")
         self.spinBox_3 = QtWidgets.QSpinBox(self.tab)
         self.spinBox_3.setGeometry(QtCore.QRect(800, 150, 42, 22))
+        self.spinBox_3.setMinimum(1)
         self.spinBox_3.setMaximum(99999)
         self.spinBox_3.setObjectName("spinBox_3")
         self.plainTextEdit = QtWidgets.QPlainTextEdit(self.tab)
@@ -77,9 +81,9 @@ class Ui_Dialog(object):
         self.label_12.setObjectName("label_12")
         self.spinBox_6 = QtWidgets.QSpinBox(self.tab)
         self.spinBox_6.setGeometry(QtCore.QRect(620, 180, 42, 21))
-        self.spinBox_6.setMinimum(0)
+        self.spinBox_6.setMinimum(1)
         self.spinBox_6.setMaximum(100)
-        self.spinBox_6.setProperty("value", 0)
+        self.spinBox_6.setProperty("value", 1)
         self.spinBox_6.setObjectName("spinBox_6")
         self.textEdit_4 = QtWidgets.QTextEdit(self.tab)
         self.textEdit_4.setGeometry(QtCore.QRect(590, 50, 181, 31))
@@ -173,6 +177,43 @@ class Ui_Dialog(object):
         self.textBrowser_4.setGeometry(QtCore.QRect(550, 420, 321, 101))
         self.textBrowser_4.setObjectName("textBrowser_4")
         self.tabWidget.addTab(self.tab_3, "")
+        self.tab_4 = QtWidgets.QWidget()
+        self.tab_4.setObjectName("tab_4")
+        self.textBrowser_5 = QtWidgets.QTextBrowser(self.tab_4)
+        self.textBrowser_5.setGeometry(QtCore.QRect(10, 0, 531, 521))
+        self.textBrowser_5.setObjectName("textBrowser_5")
+        self.label_14 = QtWidgets.QLabel(self.tab_4)
+        self.label_14.setGeometry(QtCore.QRect(550, 10, 71, 41))
+        font = QtGui.QFont()
+        font.setPointSize(15)
+        self.label_14.setFont(font)
+        self.label_14.setObjectName("label_14")
+        self.FT_textEdit_1 = QtWidgets.QTextEdit(self.tab_4)
+        self.FT_textEdit_1.setGeometry(QtCore.QRect(590, 40, 201, 31))
+        self.FT_textEdit_1.setObjectName("FT_textEdit_1")
+        self.FT_pushButton_1 = QtWidgets.QPushButton(self.tab_4)
+        self.FT_pushButton_1.setGeometry(QtCore.QRect(800, 50, 75, 23))
+        self.FT_pushButton_1.setObjectName("FT_pushButton_1")
+        self.FT_pushButton_2 = QtWidgets.QPushButton(self.tab_4)
+        self.FT_pushButton_2.setGeometry(QtCore.QRect(800, 140, 75, 23))
+        self.FT_pushButton_2.setObjectName("FT_pushButton_2")
+        self.FT_textEdit_2 = QtWidgets.QTextEdit(self.tab_4)
+        self.FT_textEdit_2.setGeometry(QtCore.QRect(590, 130, 201, 31))
+        self.FT_textEdit_2.setObjectName("FT_textEdit_2")
+        self.label_15 = QtWidgets.QLabel(self.tab_4)
+        self.label_15.setGeometry(QtCore.QRect(550, 90, 71, 41))
+        font = QtGui.QFont()
+        font.setPointSize(15)
+        self.label_15.setFont(font)
+        self.label_15.setObjectName("label_15")
+        self.FT_pushButton_3 = QtWidgets.QPushButton(self.tab_4)
+        self.FT_pushButton_3.setGeometry(QtCore.QRect(800, 190, 75, 23))
+        self.FT_pushButton_3.setObjectName("FT_pushButton_3")
+        self.textBrowser_6 = QtWidgets.QTextBrowser(self.tab_4)
+        self.textBrowser_6.setGeometry(QtCore.QRect(550, 320, 321, 201))
+        self.textBrowser_6.setAutoFormatting(QtWidgets.QTextEdit.AutoAll)
+        self.textBrowser_6.setObjectName("textBrowser_6")
+        self.tabWidget.addTab(self.tab_4, "")
 
         self.retranslateUi(Dialog)
         self.tabWidget.setCurrentIndex(0)
@@ -191,7 +232,7 @@ class Ui_Dialog(object):
         self.plainTextEdit.setPlainText(_translate("Dialog", "Class 0 with_mask\n"
 "Class 1 without_mask\n"
 "Class 2 incorrect_mask"))
-        self.label_6.setText(_translate("Dialog", "Class Information"))
+        self.label_6.setText(_translate("Dialog", "Example Class Information"))
         self.Ds_pushButton_3.setText(_translate("Dialog", "START"))
         self.textEdit_6.setHtml(_translate("Dialog", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
@@ -263,6 +304,33 @@ class Ui_Dialog(object):
 "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p>\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">1 x1,y1 x2,y2    →  2 x1,y1 x2,y2  </p></body></html>"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_3), _translate("Dialog", "ReplaceClass"))
+        self.textBrowser_5.setHtml(_translate("Dialog", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:\'PMingLiU\'; font-size:9pt; font-weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:#ffffff;\"><span style=\" font-family:\'Courier New\'; color:#000000; background-color:#ffffff;\">                  _    _     _        _____ _                 </span></p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:#ffffff;\"><span style=\" font-family:\'Courier New\'; color:#000000; background-color:#ffffff;\">                 | |  | |   (_)      / ____| |                </span></p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:#ffffff;\"><span style=\" font-family:\'Courier New\'; color:#000000; background-color:#ffffff;\">                 | |__| |___ _ _ __ | |    | |__  _   _ _ __  </span></p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:#ffffff;\"><span style=\" font-family:\'Courier New\'; color:#000000; background-color:#ffffff;\">                 |  __  / __| | \'_ \\| |    | \'_ \\| | | | \'_ \\ </span></p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:#ffffff;\"><span style=\" font-family:\'Courier New\'; color:#000000; background-color:#ffffff;\">                 | |  | \\__ \\ | | | | |____| | | | |_| | | | |</span></p>\n"
+"<p style=\" margin-top:0px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:#ffffff;\"><span style=\" font-family:\'Courier New\'; color:#000000; background-color:#ffffff;\">                 |_|  |_|___/_|_| |_|\\_____|_| |_|\\__,_|_| |_|</span></p></body></html>"))
+        self.label_14.setText(_translate("Dialog", "Path"))
+        self.FT_pushButton_1.setText(_translate("Dialog", "content"))
+        self.FT_pushButton_2.setText(_translate("Dialog", "content"))
+        self.label_15.setText(_translate("Dialog", "SavePath"))
+        self.FT_pushButton_3.setText(_translate("Dialog", "Start"))
+        self.textBrowser_6.setHtml(_translate("Dialog", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:\'PMingLiU\'; font-size:9pt; font-weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:11pt;\">1.選擇圖片路徑或是標籤路徑。</span></p>\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:11pt;\"><br /></p>\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:11pt;\"><br /></p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:11pt;\">2.選擇要存檔的路徑 將自動產生  \'Train.txt\' </span></p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:11pt;\">    </span></p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:11pt;\">    若已存在則會覆蓋刪除 請先檢查。</span></p>\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:11pt;\"><br /></p></body></html>"))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_4), _translate("Dialog", "FileToList"))
 
 
 if __name__ == "__main__":
