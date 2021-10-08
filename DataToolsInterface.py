@@ -24,21 +24,24 @@ class Main(QMainWindow, ui.Ui_Dialog):
          self.Ds_pushButton_4.clicked.connect(self.LabelsPath)
          self.Re_pushButton.clicked.connect(self.Rename_Path)
          self.Re_pushButton2.clicked.connect(self.StartRename)
+         self.Re_pushButton3.clicked.connect(self.Rename_Path2)
          self.RC_pushButton.clicked.connect(self.RC_path)
          self.RC_pushButton2.clicked.connect(self.StartReplace)
          self.FT_pushButton_1.clicked.connect(self.FT_selectpath)
          self.FT_pushButton_2.clicked.connect(self.FT_savepath)
          self.FT_pushButton_3.clicked.connect(self.FT_start)
          self.listWidget.itemSelectionChanged.connect(self.itemActivated_event)
+         self.listWidget_2.itemSelectionChanged.connect(self.itemActivated_event2)
          self.Folderpath = None
          self.Imagepath = None
          self.savefolderpath = None
-         self.Selectitem = None
+         self.selectitem = None
          self.Rename_ =None
          self.Labelspath = None
+         self.selectmodel =None
     def ImagePath(self):
         self.Imagepath = QtWidgets.QFileDialog.getExistingDirectory(self, 'Select Folder')
-        print(self.Imagepath)
+       # print(self.Imagepath)
         self.textEdit.setPlainText(self.Imagepath)
     
     def LabelsPath(self):
@@ -46,7 +49,7 @@ class Main(QMainWindow, ui.Ui_Dialog):
         self.textEdit_4.setPlainText(self.Labelspath)
     def SavePath(self):
         self.savefolderpath = QtWidgets.QFileDialog.getExistingDirectory(self, 'Select Folder')
-        print(self.savefolderpath)
+        #print(self.savefolderpath)
         self.textEdit_2.setPlainText(self.savefolderpath)
 
     def StartDatasplict(self):
@@ -87,16 +90,52 @@ class Main(QMainWindow, ui.Ui_Dialog):
     def Rename_Path(self):
         self.folderpath = QtWidgets.QFileDialog.getExistingDirectory(self, 'Select Folder')
         self.textEdit_3.setPlainText(self.folderpath)
+    def Rename_Path2(self):
+        self.folderpath = QtWidgets.QFileDialog.getExistingDirectory(self, 'Select Folder')
+        self.textEdit_7.setPlainText(self.folderpath) 
     def StartRename(self):
         try:
+            showtime= self.local__time()
+            path2 = self.textEdit_7.toPlainText()
+            path = self.textEdit_3.toPlainText()
             if  not self.folderpath :self.textEdit_6.append("error check Path and Newname and Filetype")
-            self.rename_ = self.lineEdit.text()
-            NewNameList = Rename().renameImage(self.folderpath,self.rename_,self.selectitem)
-            for _ in NewNameList:
-                self.textBrowser.append(f'New file name {_}')
+            if self.selectmodel  == 'Onlyone' :
+                self.rename_ = self.lineEdit.text()
+                print(path)
+                NewNameList = Rename().renameImage(path,self.rename_,self.selectitem)
+                self.textBrowser.append(f'{showtime} \n Path {path} \n File type {self.selectitem}' )
+                for _ in NewNameList:
+                    self.textBrowser.append(f'file name {_}')
+                
+            else:
+                self.rename_ = self.lineEdit.text()
+                NewNameList = Rename().renameImage(path,self.rename_,self.selectitem,path2)
+                self.textBrowser.append(f'{showtime} \n Path {path} \n Path2 {path2}')
+                for _ in NewNameList:
+                    self.textBrowser.append(f'file name {_}')
         except Exception as e: 
-            self.textBrowser.append(f'Error {e}')
+            self.textBrowser.append(f'{e}')
             print(e)
+        
+    def itemActivated_event2(self):
+        try:
+            for item in self.listWidget_2.selectedItems():
+                self.selectmodel = item.text()
+                if self.selectmodel  == 'Images and Labels':
+                    self.Re_pushButton3.setEnabled(True)
+                    self.textEdit_7.setEnabled(True)
+                    self.listWidget.setEnabled(False)
+                elif self.selectmodel  == 'Onlyone':
+                    self.Re_pushButton3.setEnabled(False)
+                    self.textEdit_7.setEnabled(False)
+                    self.listWidget.setEnabled(True)
+                    
+        except Exception as e :
+            self.textBrowser.append(f'Error {e}')
+
+
+
+
     def itemActivated_event(self):
         try:
             for item in self.listWidget.selectedItems():
@@ -120,7 +159,7 @@ class Main(QMainWindow, ui.Ui_Dialog):
                 self.textBrowser_3.append(showtime)
                 self.textBrowser_3.append("Compelete !")
         except Exception as e :
-            print(e)
+            #print(e)
             self.textBrowser_3.append(showtime)
             self.textBrowser_3.append(e)        
 
@@ -141,9 +180,8 @@ class Main(QMainWindow, ui.Ui_Dialog):
                 self.textBrowser_5.append(f'{count}.{_}')
             self.textBrowser_5.append(f'{showtime}       Total number is {count} ......')
         except Exception as e :
-            print(e)
             self.textBrowser_5.append(self.local__time())
-            self.textBrowser_5.append(f'Error {e}.')  
+            self.textBrowser_5.append(f'{e}.')  
 
     def FT_savepath(self):
         showtime= self.local__time()
@@ -151,8 +189,7 @@ class Main(QMainWindow, ui.Ui_Dialog):
             savepath = QtWidgets.QFileDialog.getExistingDirectory(self, 'Select Folder')
             self.FT_textEdit_2.setPlainText(f'{savepath}/Train.txt') 
         except Exception as e :
-            print(e)
-            self.textBrowser_5.append(f'{showtime}     Error     {e}.')  
+            self.textBrowser_5.append(f'{showtime}  {e}.')  
 
     def FT_start(self):
         showtime= self.local__time()
@@ -161,7 +198,7 @@ class Main(QMainWindow, ui.Ui_Dialog):
             self.textBrowser_5.append(f'Complete ! ..check {self.FT_textEdit_2.toPlainText()}') 
         except Exception as e :
             print(e)
-            self.textBrowser_5.append(f'{showtime}     Error     {e}.')  
+            self.textBrowser_5.append(f'{showtime}  {e}.')  
 
 if __name__ == '__main__':
     import sys
