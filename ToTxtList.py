@@ -22,7 +22,6 @@ def Conversion_v3Text(Apath):
     for labeltxt in Apath_filelist:
         with open(Apath+'/'+labeltxt,'r+') as f:
             line = f.read().splitlines()
-        for _ in range (0,len(line)):
             with open('train_info.csv', 'a+', newline='') as csvfile:
                 writer = csv.writer(csvfile)
                 for _ in range (0,len(line)):
