@@ -11,7 +11,7 @@ from selectpath import *
 from Rename import *
 import time
 from ToTxtList import *
-
+from PyQt5 import QtCore
 
 
 class Main(QMainWindow, ui.Ui_Dialog):
@@ -32,6 +32,7 @@ class Main(QMainWindow, ui.Ui_Dialog):
          self.FT_pushButton_3.clicked.connect(self.FT_start)
          self.listWidget.itemSelectionChanged.connect(self.itemActivated_event)
          self.listWidget_2.itemSelectionChanged.connect(self.itemActivated_event2)
+         self.checkBox.stateChanged.connect(self.checkBoxChangedAction)
          self.Folderpath = None
          self.Imagepath = None
          self.savefolderpath = None
@@ -39,6 +40,8 @@ class Main(QMainWindow, ui.Ui_Dialog):
          self.Rename_ =None
          self.Labelspath = None
          self.selectmodel =None
+
+        
     def ImagePath(self):
         self.Imagepath = QtWidgets.QFileDialog.getExistingDirectory(self, 'Select Folder')
        # print(self.Imagepath)
@@ -115,7 +118,6 @@ class Main(QMainWindow, ui.Ui_Dialog):
                     self.textBrowser.append(f'file name {_}')
         except Exception as e: 
             self.textBrowser.append(f'{e}')
-            print(e)
         
     def itemActivated_event2(self):
         try:
@@ -190,12 +192,23 @@ class Main(QMainWindow, ui.Ui_Dialog):
             self.FT_textEdit_2.setPlainText(f'{savepath}/Train.txt') 
         except Exception as e :
             self.textBrowser_5.append(f'{showtime}  {e}.')  
-
-    def FT_start(self):
+    def checkBoxChangedAction(self, state):
+        if (QtCore.Qt.Checked == state):
+            self.FT_textEdit_2.setEnabled(False)
+            self.FT_pushButton_2.setEnabled(False)
+        else:
+            self.FT_textEdit_2.setEnabled(True)
+    def FT_start(self,state):
         showtime= self.local__time()
         try:
-            Conversion_Txt(self.FT_textEdit_1.toPlainText(),self.FT_textEdit_2.toPlainText())
-            self.textBrowser_5.append(f'Complete ! ..check {self.FT_textEdit_2.toPlainText()}') 
+            self.textBrowser_5.append(f'{showtime}  YoLov3 state = {self.checkBox.isChecked()}') 
+            if self.checkBox.isChecked() == False:
+                self.textBrowser_5.append(f'{showtime}  normal format ..start ') 
+                Conversion_Txt(self.FT_textEdit_1.toPlainText(),self.FT_textEdit_2.toPlainText())
+                self.textBrowser_5.append(f'{showtime}  Complete ! ..check {self.FT_textEdit_2.toPlainText()}') 
+            else:
+                Conversion_v3Text(self.FT_textEdit_1.toPlainText())
+                self.textBrowser_5.append(f'{showtime}  Complete ! ..check {self.FT_textEdit_2.toPlainText()}') 
         except Exception as e :
             print(e)
             self.textBrowser_5.append(f'{showtime}  {e}.')  
